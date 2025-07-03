@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,12 +14,18 @@
         }
         .invoice-container {
             max-width: 1000px;
-            margin: 2rem auto;
-            padding: 2.5rem;
+            margin: 1rem auto;
+            padding: 1.5rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
             background-color: #ffffff;
             border-top: 5px solid #6b4f4b;
+        }
+        @media (min-width: 768px) {
+            .invoice-container {
+                margin: 2rem auto;
+                padding: 2.5rem;
+            }
         }
         .btn {
             transition: all 0.3s ease;
@@ -82,32 +87,32 @@
 
     <div class="invoice-container">
         <!-- Header -->
-        <header class="flex justify-between items-start mb-8 pb-4 border-b">
-            <div>
-                <img src="https://placehold.co/100x100/f4f1eb/6b4f4b?text=K-Cafe" alt="K Cafe Logo" class="rounded-full">
-                <h1 class="text-4xl font-bold text-gray-800 mt-4">K Cafe</h1>
-                <p class="text-gray-500">Event Billing</p>
+        <header class="flex flex-col sm:flex-row justify-between items-start mb-8 pb-4 border-b">
+            <div class="flex items-center">
+                <img src="https://placehold.co/80x80/f4f1eb/6b4f4b?text=K-Cafe" alt="K Cafe Logo" class="rounded-full mr-4">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800">K Cafe</h1>
+                    <p class="text-gray-500">Event Billing</p>
+                </div>
             </div>
-            <div class="text-right">
+            <div class="text-left sm:text-right mt-4 sm:mt-0 w-full sm:w-auto">
                 <h2 class="text-2xl font-semibold uppercase text-gray-700">Invoice</h2>
                 <div class="mt-2">
                     <label for="invoiceNumber" class="text-sm font-medium text-gray-600">Invoice #</label>
-                    <input type="text" id="invoiceNumber" class="form-input mt-1 p-1 w-40 text-right font-semibold text-gray-800" readonly>
+                    <input type="text" id="invoiceNumber" class="form-input mt-1 p-1 w-full sm:w-40 text-left sm:text-right font-semibold text-gray-800" readonly>
                 </div>
                 <div class="mt-2">
                     <label for="invoiceDate" class="text-sm font-medium text-gray-600">Date</label>
-                    <input type="date" id="invoiceDate" class="form-input mt-1 p-1 w-40 text-right">
+                    <input type="date" id="invoiceDate" class="form-input mt-1 p-1 w-full sm:w-40 text-left sm:text-right">
                 </div>
             </div>
         </header>
 
         <!-- Client Info -->
-        <div class="grid grid-cols-2 gap-8 mb-8">
-            <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-semibold text-gray-700 mb-2">Bill To:</h3>
-                <input type="text" id="clientName" placeholder="Client Name" class="form-input w-full p-2 mb-2">
-                <input type="text" id="clientContact" placeholder="Client Contact" class="form-input w-full p-2">
-            </div>
+        <div class="bg-gray-50 p-4 rounded-lg mb-8">
+            <h3 class="font-semibold text-gray-700 mb-2">Bill To:</h3>
+            <input type="text" id="clientName" placeholder="Client Name" class="form-input w-full p-2 mb-2">
+            <input type="text" id="clientContact" placeholder="Client Contact" class="form-input w-full p-2">
         </div>
 
         <!-- Add Item Form -->
@@ -149,11 +154,11 @@
                 <table class="min-w-full">
                     <thead class="border-b-2 border-gray-300">
                         <tr>
-                            <th class="text-left py-3 px-4 font-semibold text-sm text-gray-600 uppercase">Product</th>
-                            <th class="text-center py-3 px-4 font-semibold text-sm text-gray-600 uppercase">Quantity</th>
-                            <th class="text-right py-3 px-4 font-semibold text-sm text-gray-600 uppercase">Unit Price</th>
-                            <th class="text-right py-3 px-4 font-semibold text-sm text-gray-600 uppercase">Total</th>
-                            <th class="text-center py-3 px-4 font-semibold text-sm text-gray-600 uppercase no-print"></th>
+                            <th class="text-left py-3 px-2 sm:px-4 font-semibold text-sm text-gray-600 uppercase">Product</th>
+                            <th class="text-center py-3 px-2 sm:px-4 font-semibold text-sm text-gray-600 uppercase">Quantity</th>
+                            <th class="text-right py-3 px-2 sm:px-4 font-semibold text-sm text-gray-600 uppercase">Unit Price</th>
+                            <th class="text-right py-3 px-2 sm:px-4 font-semibold text-sm text-gray-600 uppercase">Total</th>
+                            <th class="text-center py-3 px-2 sm:px-4 font-semibold text-sm text-gray-600 uppercase no-print"></th>
                         </tr>
                     </thead>
                     <tbody id="billingItems" class="divide-y divide-gray-200">
@@ -165,8 +170,8 @@
         <!-- Total & Notes Section -->
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-                <h4 class="font-semibold text-gray-700 mb-2">Notes:</h4>
-                <textarea id="notes" class="form-input w-full p-2" rows="4" placeholder="Koi khaas baat ya terms & conditions..."></textarea>
+                <h4 class="font-semibold text-gray-700 mb-2">Terms & Conditions:</h4>
+                <textarea id="notes" class="form-input w-full p-2 text-sm text-gray-600" rows="5"></textarea>
             </div>
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
@@ -214,6 +219,7 @@
         const totalEl = document.getElementById('total');
         const discountInput = document.getElementById('discountInput');
         const taxInput = document.getElementById('taxInput');
+        const notesEl = document.getElementById('notes');
         const generatePdfBtn = document.getElementById('generatePdfBtn');
         const invoiceDateEl = document.getElementById('invoiceDate');
         const invoiceNumberEl = document.getElementById('invoiceNumber');
@@ -229,6 +235,14 @@
             invoiceDateEl.value = today.toISOString().split('T')[0];
             const dateStr = today.toISOString().slice(0, 10).replace(/-/g, "");
             invoiceNumberEl.value = `KCF-${dateStr}-${String(Math.floor(Math.random() * 1000) + 1).padStart(3, '0')}`;
+            
+            const termsAndConditions = [
+                "- Payment will be made in advance.",
+                "- No returns will be accepted.",
+                "- Water can be of any brand: Pakola or Abae Dubai.",
+                "- If rates are changed by the company, the same will apply here."
+            ].join('\n');
+            notesEl.value = termsAndConditions;
         }
 
         function showModal(message) {
@@ -252,7 +266,6 @@
                 const newItem = { id: itemId++, name, size, qty, price, total: qty * price };
                 items.push(newItem);
                 renderTable();
-                updateTotals();
                 clearForm();
             } else {
                 showModal('Please fill all product fields correctly.');
@@ -269,7 +282,6 @@
                     item.total = item.qty * item.price;
                 }
                 renderTable();
-                updateTotals();
             }
         }
 
@@ -279,20 +291,21 @@
                 const row = document.createElement('tr');
                 row.className = 'item-row';
                 row.innerHTML = `
-                    <td class="py-3 px-4">
+                    <td class="py-3 px-2 sm:px-4">
                         <p class="font-semibold text-gray-800">${item.name}</p>
                         <p class="text-sm text-gray-500">${item.size}</p>
                     </td>
-                    <td class="py-3 px-4 no-print">
-                        <div class="flex items-center justify-center space-x-2">
+                    <td class="py-3 px-2 sm:px-4">
+                        <div class="flex items-center justify-center space-x-1 sm:space-x-2 no-print">
                             <button class="qty-btn decrease-qty" data-id="${item.id}">-</button>
-                            <input type="number" value="${item.qty}" min="1" class="form-input w-16 text-center p-1 qty-input" data-id="${item.id}">
+                            <input type="number" value="${item.qty}" min="1" class="form-input w-12 sm:w-16 text-center p-1 qty-input" data-id="${item.id}">
                             <button class="qty-btn increase-qty" data-id="${item.id}">+</button>
                         </div>
+                        <span class="print-only hidden">${item.qty}</span>
                     </td>
-                    <td class="text-right py-3 px-4">Rs ${item.price.toFixed(2)}</td>
-                    <td class="text-right py-3 px-4 font-semibold">Rs ${item.total.toFixed(2)}</td>
-                    <td class="text-center py-3 px-4 no-print">
+                    <td class="text-right py-3 px-2 sm:px-4">Rs ${item.price.toFixed(2)}</td>
+                    <td class="text-right py-3 px-2 sm:px-4 font-semibold">Rs ${item.total.toFixed(2)}</td>
+                    <td class="text-center py-3 px-2 sm:px-4 no-print">
                         <button class="remove-btn p-2 rounded-full text-red-500" data-id="${item.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
@@ -340,7 +353,7 @@
             const invoiceDate = invoiceDateEl.value;
             const clientName = document.getElementById('clientName').value || 'N/A';
             const clientContact = document.getElementById('clientContact').value || 'N/A';
-            const notes = document.getElementById('notes').value;
+            const notes = notesEl.value;
 
             const logoImg = new Image();
             logoImg.crossOrigin = 'Anonymous';
@@ -351,33 +364,17 @@
                 canvas.getContext('2d').drawImage(this, 0, 0);
                 const dataUrl = canvas.toDataURL('image/png');
 
-                // Header
                 doc.addImage(dataUrl, 'PNG', 15, 12, 25, 25);
-                doc.setFontSize(26);
-                doc.setFont('helvetica', 'bold');
-                doc.text("K Cafe", 45, 25);
-                doc.setFontSize(10);
-                doc.setFont('helvetica', 'normal');
-                doc.text("Event Billing", 45, 31);
-
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                doc.text("INVOICE", 200, 20, { align: 'right' });
-                doc.setFontSize(10);
-                doc.text(`Invoice #: ${invoiceNumber}`, 200, 28, { align: 'right' });
+                doc.setFontSize(26); doc.setFont('helvetica', 'bold'); doc.text("K Cafe", 45, 25);
+                doc.setFontSize(10); doc.setFont('helvetica', 'normal'); doc.text("Event Billing", 45, 31);
+                doc.setFontSize(16); doc.setFont('helvetica', 'bold'); doc.text("INVOICE", 200, 20, { align: 'right' });
+                doc.setFontSize(10); doc.text(`Invoice #: ${invoiceNumber}`, 200, 28, { align: 'right' });
                 doc.text(`Date: ${invoiceDate}`, 200, 33, { align: 'right' });
                 
-                // Client Info
-                doc.setDrawColor(200);
-                doc.line(15, 45, 200, 45);
-                doc.setFontSize(11);
-                doc.setFont('helvetica', 'bold');
-                doc.text("BILL TO", 15, 55);
-                doc.setFont('helvetica', 'normal');
-                doc.text(clientName, 15, 61);
-                doc.text(clientContact, 15, 66);
+                doc.setDrawColor(200); doc.line(15, 45, 200, 45);
+                doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.text("BILL TO", 15, 55);
+                doc.setFont('helvetica', 'normal'); doc.text(clientName, 15, 61); doc.text(clientContact, 15, 66);
                 
-                // Table
                 const tableColumn = [
                     { header: 'Product', dataKey: 'name' },
                     { header: 'Qty', dataKey: 'qty' },
@@ -392,22 +389,14 @@
                 }));
 
                 doc.autoTable({
-                    columns: tableColumn,
-                    body: tableRows,
-                    startY: 75,
-                    theme: 'grid',
+                    columns: tableColumn, body: tableRows, startY: 75, theme: 'grid',
                     headStyles: { fillColor: [107, 79, 75], textColor: 255, fontStyle: 'bold' },
                     styles: { cellPadding: 2.5, fontSize: 10, valign: 'middle' },
-                    columnStyles: {
-                        qty: { halign: 'center' },
-                        price: { halign: 'right' },
-                        total: { halign: 'right' }
-                    }
+                    columnStyles: { qty: { halign: 'center' }, price: { halign: 'right' }, total: { halign: 'right' } }
                 });
                 
                 let finalY = doc.lastAutoTable.finalY;
 
-                // Totals
                 const subtotal = items.reduce((acc, item) => acc + item.total, 0);
                 const discount = parseFloat(discountInput.value) || 0;
                 const taxPercent = parseFloat(taxInput.value) || 0;
@@ -416,36 +405,27 @@
 
                 doc.setFontSize(10);
                 let yPos = finalY + 10;
-                doc.text(`Subtotal:`, 150, yPos, { align: 'right' });
-                doc.text(`Rs ${subtotal.toFixed(2)}`, 200, yPos, { align: 'right' });
+                doc.text(`Subtotal:`, 150, yPos, { align: 'right' }); doc.text(`Rs ${subtotal.toFixed(2)}`, 200, yPos, { align: 'right' });
                 yPos += 6;
-                doc.text(`Discount:`, 150, yPos, { align: 'right' });
-                doc.text(`- Rs ${discount.toFixed(2)}`, 200, yPos, { align: 'right' });
+                doc.text(`Discount:`, 150, yPos, { align: 'right' }); doc.text(`- Rs ${discount.toFixed(2)}`, 200, yPos, { align: 'right' });
                 yPos += 6;
-                doc.text(`Tax (${taxPercent}%):`, 150, yPos, { align: 'right' });
-                doc.text(`+ Rs ${taxAmount.toFixed(2)}`, 200, yPos, { align: 'right' });
+                doc.text(`Tax (${taxPercent}%):`, 150, yPos, { align: 'right' }); doc.text(`+ Rs ${taxAmount.toFixed(2)}`, 200, yPos, { align: 'right' });
                 yPos += 4;
-                doc.setDrawColor(107, 79, 75);
-                doc.line(130, yPos, 200, yPos);
+                doc.setDrawColor(107, 79, 75); doc.line(130, yPos, 200, yPos);
                 yPos += 6;
-                doc.setFontSize(12);
-                doc.setFont('helvetica', 'bold');
-                doc.text(`Total:`, 150, yPos, { align: 'right' });
-                doc.text(`Rs ${total.toFixed(2)}`, 200, yPos, { align: 'right' });
+                doc.setFontSize(12); doc.setFont('helvetica', 'bold');
+                doc.text(`Total:`, 150, yPos, { align: 'right' }); doc.text(`Rs ${total.toFixed(2)}`, 200, yPos, { align: 'right' });
 
-                // Notes
                 if (notes) {
-                    doc.setFontSize(10);
+                    doc.setFontSize(9);
                     doc.setFont('helvetica', 'bold');
-                    doc.text("Notes:", 15, finalY + 10);
+                    doc.text("Terms & Conditions:", 15, finalY + 10);
                     doc.setFont('helvetica', 'normal');
                     const splitNotes = doc.splitTextToSize(notes, 100);
                     doc.text(splitNotes, 15, finalY + 16);
                 }
 
-                // Footer
-                doc.setFontSize(9);
-                doc.setTextColor(150);
+                doc.setFontSize(9); doc.setTextColor(150);
                 doc.text("Thank you for your business!", 105, doc.internal.pageSize.height - 10, { align: 'center' });
 
                 doc.save(`KCafe-Invoice-${invoiceNumber}.pdf`);
